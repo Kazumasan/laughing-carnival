@@ -1,1 +1,6 @@
-<H1> Landing Page </H1>
+<script>
+
+    import {test} from "$app/PageData"
+</script>
+
+<H1> Landing Page {test}</H1>
