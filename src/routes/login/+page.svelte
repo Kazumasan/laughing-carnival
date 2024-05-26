@@ -1,15 +1,22 @@
-<script>
-    
+<script lang="ts">
+    export let data;
+    import {Auth} from '@supabase/auth-ui-svelte';
+    import {ThemeSupa} from '@supabase/auth-ui-shared'
+    let {supabase, session} = data;
+    $: ({supabase, session} = data);
+
+    console.log(supabase);
+    console.log(session);
 </script>
 
 <style>
 
 
 </style>
-
-<h1> Login Form </h1>
-
-<form action="authuser()">
-    <input type="text" name="username" id="username" /> 
-    <input type="password" name="password" id="password" />
-</form>
+<!-- supabase auth ui -->
+<Auth supabaseClient={supabase} theme="dark" appearance={{
+    theme: ThemeSupa, 
+    style: {
+        input: "width: 400px"
+    }
+}}/> 
