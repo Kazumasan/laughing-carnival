@@ -20,6 +20,3 @@
 
 <h1>Hello {username}!</h1>
 
-//comment for commit
-
-
