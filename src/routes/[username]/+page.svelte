@@ -18,5 +18,4 @@
     $: username = $page.params.username
 </script>
 
-<h1>Hello {username}!</h1>
-//
+<h1 class="text-3xl">Hello {username}!</h1>

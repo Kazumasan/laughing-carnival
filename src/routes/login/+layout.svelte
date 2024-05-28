@@ -3,7 +3,7 @@
         width: 100%;
         height: auto;
         padding: 2rem, 0rem, 2rem, 0rem;
-        background-color: #5724d5;
+        background-color: #300d86;
         display: flex;
         justify-content: space-around;
     }

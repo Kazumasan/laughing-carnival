@@ -1,6 +1,4 @@
 <script>
 </script>
 
-<style></style>
-
-<h1> Landing Page</h1>
+<h1 class="text-3xl font-bold underline"> Landing Page</h1>

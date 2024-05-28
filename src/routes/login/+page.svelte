@@ -8,8 +8,8 @@
     let {supabase, session} = data;
     $: ({supabase, session} = data);
 
-   let myFunc : int;
-   myFunc = "5"
+   //let myFunc : (int);
+   //myFunc = "5"
 
     $: console.log(supabase);
     $: console.log(session);
@@ -24,8 +24,7 @@
 
 
 
-<input type="button" on:click={() => {myFunc++}} value="myFunc++" />
-<p>{myFunc}</p>
+
 
 {#if  data.session != null}
 	<h1>Hey you Are Loged in {data.session}</h1>

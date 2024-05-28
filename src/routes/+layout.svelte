@@ -1,5 +1,6 @@
 <script>
  let username = "Testusername"
+ import "../app.css"
 </script>
 
 
