@@ -1,4 +1,6 @@
 <script>
+
+    import "../app.css"
     export let data;
     $: ({session} = data);
 </script>
