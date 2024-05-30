@@ -1,3 +1,9 @@
+<script>
+    export let data;
+
+    console.log(data)
+</script>
+
 
 <body class="bg-gray-900 text-white">
   <header class="flex justify-between items-center py-4 px-6 bg-gray-800">

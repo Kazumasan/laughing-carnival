@@ -1,6 +1,6 @@
 <script>
- let username = "Testusername"
- import "../app.css"
+    export let data;
+    $: ({session} = data);
 </script>
 
 
@@ -28,8 +28,12 @@ a{
 <!-- Navbar -->
 <div id="Navbar">
     <table id="Nav_Table">
-        <td><a href="/username">{username}</a></td>
-        <td><a href="/login">Login</a></td>
+        {#if session != null}
+            <td><a href={session.user.email}>{session.user.email}</a></td>
+        {:else}
+            <td><a href="/login">Login</a></td>
+        {/if}
+        
         <td><a href="/list">List</a></td>
     </table>
 </div>

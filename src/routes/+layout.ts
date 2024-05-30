@@ -8,12 +8,15 @@ import type { LayoutLoad } from "./$types"
 
 export const ssr = false;
 
-export const load: LayoutLoad = async ({ fetch, data, depends }: any) => {
+export const load = async ({ fetch, data, depends }: any) => {
     depends('supabase:auth')
 
     const supabase = createBrowserClient(env.SUPABASE_URL,  env.SUPABASE_ANON, {
         global: {
             fetch
+        },
+        db : {
+            schema : "myanimelist"
         },
         cookies: {
             get(key) {
