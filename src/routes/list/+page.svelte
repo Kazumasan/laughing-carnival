@@ -4,7 +4,7 @@
     console.log(data)
 
     // use data.anmie for list of animes e.g
-    console.log(data.animes);
+    console.log(data);
 </script>
 
 
