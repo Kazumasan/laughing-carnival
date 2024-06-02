@@ -5,8 +5,17 @@ import { getAnimes, getUsersWatchlists} from '$lib/db_fetch';
 export const load: Load = async ({ params, fetch, parent }) => {
     // Get the Supabase client from the context
     const { supabase, session} = await parent();    
+    let returnObject = {
+        userData : {},
+        animes : await getAnimes(supabase)
+    };
 
-    const {animes} = await getAnimes(supabase);
-    const {watchlists} = await getUsersWatchlists(supabase, session.user.id)
-    return { animes, watchlists };
+    if(session != null){
+        const {watchlists} = await getUsersWatchlists(supabase, session.user.id)
+        returnObject.userData = {
+            watchlists
+        }
+    }
+     
+    return returnObject;
 };
