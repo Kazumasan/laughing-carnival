@@ -1,35 +1,21 @@
 // src/routes/[slug]/+page.ts
 import type { Load } from '@sveltejs/kit';
+import { getAnimes, getUsersWatchlists} from '$lib/db_fetch';
 
 export const load: Load = async ({ params, fetch, parent }) => {
     // Get the Supabase client from the context
-    const { supabase, session} = await parent();
+    const { supabase, session} = await parent();    
+    let returnObject = {
+        userData : {},
+        animes : await getAnimes(supabase)
+    };
 
-    // get animes
-    const { data, error } = await supabase
-        .from('animes')
-        .select('*')
-
-    if (error) {
-        console.error(error);
-        return { error };
+    if(session != null){
+        const {watchlists} = await getUsersWatchlists(supabase, session.user.id)
+        returnObject.userData = {
+            watchlists
+        }
     }
-
-    let responseData = {
-        animes: data
-    }
-
-    console.log(responseData)
-
-    responseData.animes.forEach(async (anime) => {
-            const response = await supabase.from("studios").select("*").eq("id", anime.studio);
-
-            anime.studio = response.data[0]
-    
-            if(error){
-                console.error(error);
-            }
-    });
-
-    return { animes : data };
+     
+    return returnObject;
 };

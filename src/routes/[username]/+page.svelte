@@ -22,6 +22,6 @@
     }
 </script>
 
-<h1 class="text-3xl">Hello {username}!</h1>
+<h1 class=" center text-3xl">Hello {username}!</h1>
 
 <button type="button" on:click={Logout}>Logout</button>
