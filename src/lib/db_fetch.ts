@@ -20,7 +20,7 @@ export const getAnimes = async (supabase : any, selector = "*") => {
             anime.studio = await resolveStudioIDs(supabase, anime.studio);
     });
 
-    return responseData;
+    return responseData.animes;
 }
 
 export const getAnimeByName = async (supabase : any, SearchName : String) => {
