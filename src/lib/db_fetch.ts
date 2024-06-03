@@ -1,4 +1,3 @@
-import { en, supabase } from "@supabase/auth-ui-shared";
 
 export const getAnimes = async (supabase : any, selector = "*") => {
 
