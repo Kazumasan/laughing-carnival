@@ -18,10 +18,6 @@
 
 </script>
 
-<style>
-
-
-</style>
 <!-- supabase auth ui -->
 
 <Auth supabaseClient={supabase} theme="dark" appearance={{
