@@ -5,12 +5,6 @@
     $: (data)
 </script>
 
-<<<<<<< HEAD
-{#each data.app.animes as anime }
-    <div style="background-color: #f0f;">{anime.studio.name}</div>
-    <input type="text" bind:value={anime.studio.name} />
-{/each}
-=======
 
 
 
@@ -29,4 +23,3 @@
         </div>
     </div>
 </body>
->>>>>>> aba12bb94078ec82aafbdbee2358ade72fc58729
