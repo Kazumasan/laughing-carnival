@@ -16,7 +16,7 @@
         <div class="space-y-2">
             <!-- Repeat this div for each entry -->
             
-            {#each data.animes as anime }
+            {#each data.app.animes as anime }
             <div class="p-2 bg-gray-800 rounded border border-gray-700">{anime.studio.name} </div>
             <input class="p-2 bg-gray-800 rounded border border-gray-700" type="text" bind:value={anime.studio.name} />
             {/each}

@@ -1,8 +1,11 @@
 <script>
     import { goto, invalidateAll } from "$app/navigation";
-
     import {page} from "$app/stores";
+    import Anime from "../../modules/Anime.svelte"
+
+    
     export let data;
+    console.log(data);
     let {supabase, session} = data;
     $: ({supabase, session} = data);
 
@@ -21,6 +24,8 @@
     }
 </script>
 
-<h1 class=" center text-3xl">Hello {username}!</h1>
-
-<button type="button" on:click={Logout}>Logout</button>
+<main>
+    {#each data.app.userData.watchlist as anime }
+        <!-- <Anime bind:Anime={anime} /> -->
+    {/each}
+</main>

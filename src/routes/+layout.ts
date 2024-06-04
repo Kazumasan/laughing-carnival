@@ -4,9 +4,7 @@ const env = {
 }
 
 import { createBrowserClient, isBrowser, parse } from "@supabase/ssr"
-import type { LayoutLoad } from "./$types"
-import { getAnimes, getWatchlist} from '$lib/db_fetch';  
-import type { Load } from '@sveltejs/kit';
+import { getAnimes, getWatchlist, resolveAnimeID, resolveStudioIDs} from '$lib/db_fetch';  
 
 export const ssr = false;
 
@@ -48,7 +46,15 @@ export const load = async ({ fetch, data, depends }: any) => {
         returnObject.userData = {
             watchlist
         }
+
+        await returnObject.userData.watchlist.forEach(async(anime)=>{
+            let response = await resolveAnimeID(supabase, anime.animeid)
+            anime.anime = response.data[0];   
+            anime.anime.studio = await resolveStudioIDs(supabase, anime.anime.studio);
+            console.log(anime)
+            delete anime.animeid;
+        })
     }
-    
+
     return { supabase, session, app: returnObject}
 }
