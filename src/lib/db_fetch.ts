@@ -35,52 +35,42 @@ export const resolveStudioIDs = async (supabase : any, studioID: String) => {
             return response.data[0]
 }
 
-export const getUsersWatchlists = async (supabase : any, userid : String) => {
+export const getWatchlist = async (supabase : any, userid : String) => {
 
     //select everything from the Watchlisttable that matches the userid
     let {data, error} = await supabase
-        .from("watchlists")
-        .select("*")
+        .from("watchlist_entries")
+        .select("animeid, watched")
         .eq("userid", userid);
 
     if(error) {
         console.error(error);
         return error;
     }
-
-    let responseData = {
-        watchlists : data // Array
-    }
-
-    //resolve each entrie from each list.
-    responseData.watchlists.forEach( async (watchlist : any) => {
-        watchlist.entries = await resolveWatchlistEntries(supabase, watchlist.id);
-    })
-
     
     return {
-        watchlists : data
+        watchlist : data
     }
 }
 
-export const resolveWatchlistEntries = async (supabase: any, watchlistId: String) => {
+// export const resolveWatchlistEntries = async (supabase: any, session: String) => {
 
-    let entries  = await supabase
-        .from("watchlist_entries")
-        .select("animeid, watched")
-        .eq("watchlistid", watchlistId);
-        if(entries.error){
-            console.error(entries.error);
-            return entries.error;
-        }
+//     let entries  = await supabase
+//         .from("watchlist_entries")
+//         .select("animeid, watched")
+//         .eq("userid", session.user.id);
+//         if(entries.error){
+//             console.error(entries.error);
+//             return entries.error;
+//         }
 
-        // {data, error}
-        entries.data.forEach(async (anime : Object)=> {
-            let response = await resolveAnimeID(supabase, anime.animeid);
-            anime.anime = response.data[0]
-        })
-        return entries.data
-}
+//         // {data, error}
+//         entries.data.forEach(async (anime : Object)=> {
+//             let response = await resolveAnimeID(supabase, anime.animeid);
+//             anime.anime = response.data[0]
+//         })
+//         return entries.data
+// }
 
 export const resolveAnimeID = async (supabase: any, animeid: String) => {
     return await supabase.from("animes").select("*").eq("id", animeid);

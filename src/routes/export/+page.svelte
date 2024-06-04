@@ -3,17 +3,10 @@
     import Fuse from "fuse.js";
     import * as jsonexport from "jsonexport/dist";
 
-    let data = {
-        animes: [
-            { name: "Jujukaise" },
-            { name: "Naruto" },
-            { name: "Highschool DxD" },
-            { name: "My Hero Academia" },
-            { name: "Wisemens Grandchild" },
-        ],
-    };
+    export let data;
+    console.log(data);
 
-    let fuse = new Fuse(data.animes, {
+    let fuse = new Fuse(data.app.animes, {
         // isCaseSensitive: false,
         // includeScore: false,
         shouldSort: true,
@@ -27,7 +20,7 @@
         // ignoreLocation: false,
         // ignoreFieldNorm: false,
         // fieldNormWeight: 1,
-        keys: ["name"],
+        keys: ["titel"],
     });
     // export let data;
 
@@ -68,9 +61,15 @@
         bind:value={searchText}
     />
     <table>
-        {#each results as result}
-            <tr>{result.item.name}</tr>
-        {/each}
+        {#if searchText == ""}
+            {#each data.app.animes as animes}
+                <tr>{animes.titel}</tr>
+            {/each}
+        {:else}
+            {#each results as result}
+                <tr>{result.item.titel}</tr>
+            {/each}
+        {/if}
     </table>
 
     <input type="button" on:click={exportToCSV} value="Export to CSV" />
