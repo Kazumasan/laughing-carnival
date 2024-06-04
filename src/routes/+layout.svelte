@@ -12,7 +12,7 @@
     <header class="p-4">
         <h1 class="container mx-auto text-center text-5xl">MyAnimeList</h1>
     </header>
-    <nav class="flex justify-between items-center p-4">
+    <nav class="flex justify-between items-center p-4">  
         <table class="w-full">
             <tr>
                 {#if session != null}
@@ -22,7 +22,6 @@
                     <td class="pr-80">
                         <a class="bg-blue-500 py-2 px-4 rounded text-white text-2xl font-sans" href="/login">Login</a></td>
                 {/if}
-                
                 <td class="pr-20 text-center">
                     <a class="bg-blue-500 py-2 px-4 rounded text-white text-2xl font-sans" href="/list">Watchlist</a></td>
                 <td class="pr-20 text-right">
