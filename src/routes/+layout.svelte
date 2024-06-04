@@ -34,10 +34,4 @@
     </nav>
 </body>
 
-
-
-
-
-
-
 <slot></slot>

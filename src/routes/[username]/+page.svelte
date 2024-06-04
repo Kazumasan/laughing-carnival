@@ -1,7 +1,6 @@
 <script>
     import { goto, invalidateAll } from "$app/navigation";
 
-
     import {page} from "$app/stores";
     export let data;
     let {supabase, session} = data;

@@ -2,7 +2,9 @@
     export let data;
 
     console.log(data)
-    $: console.log(data.animes[0].studio.name)
+    $: (data.animes[0].studio.name)
+
+    
 </script>
 
 
