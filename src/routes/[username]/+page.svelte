@@ -1,7 +1,6 @@
 <script lang="ts">
     import { goto, invalidateAll } from "$app/navigation";
     import { page } from "$app/stores";
-    import { removeFromWatchlist } from "$lib/db_fetch.ts";
 
     export let data;
     console.log(data);
@@ -11,26 +10,6 @@
     $: if (session == null) {
         goto("/login");
     }
-
-    const test = [
-        {
-            titel: "Test",
-            Episoden: 28
-        },
-        {
-            titel: "Test2",
-            Episoden: 28
-        },
-        {
-            titel: "Test3",
-            Episoden: 28
-        },
-        {
-            titel: "Test4",
-            Episoden: 28
-        },
-    ]
-
     //session is valid
     // go get data from supabase with session ID Xyz
 
@@ -45,20 +24,27 @@
     <div class="container mx-auto">
         <div class="flex justify-between items-center mb-4">
             <h2 class="text-lg">Meine Watchlist:</h2>
-            <div class="space-x-2">
-                <button
-                    class="bg-emerald-400 hover:bg-emerald-500 text-white px-3 py-2 rounded"
-                    >Hinzufügen+</button
-                >
-                <button
-                    class="bg-blue-700 hover:bg-blue-800 text-white px-3 py-2 rounded"
-                    >Download ⬇️</button
-                >
-            </div>
+            <div class="space-x-2"></div>
         </div>
         <div class="space-y-2">
-                {#each data.app.userData.watchlist as entry}
-                    <div class="flex space-x-2 border border-gray-700 p-2">
+            {#if data.app.watchlist}
+                {#each data.app.watchlist as entry}
+                    {JSON.stringify(entry)}
+                {/each}
+            {:else}
+                <div>
+                    No Session go to Login 
+                    <button on:click={() => goto("/login")}>Login</button>
+                </div>
+            {/if}
+
+            <!-- Continue adding rows as needed -->
+        </div>
+    </div>
+</body>
+
+
+<!-- <div class="flex space-x-2 border border-gray-700 p-2">
                         <div
                             class="flex-grow p-2 bg-gray-800 border border-gray-700 text-center"
                         >
@@ -85,17 +71,14 @@
                             Studio Location:{entry.anime.studio.location}
                         </div>
                         <button
-                            on:click={removeFromWatchlist(
-                                data.supabase,
-                                entry.anime.id,
-                                data.session.user.id,
-                            )}
+                            on:click={() => {
+                                removeFromWatchlist(
+                                    data.supabase,
+                                    entry.anime.id,
+                                    data.session.user.id,
+                                );
+                            }}
                             class="px-4 py-2 bg-red-400 hover:bg-red-500 text-white rounded border border-gray-700"
-                            >remove -</button>
-                    </div>
-                {/each}
-                   
-                <!-- Continue adding rows as needed -->
-        </div>
-    </div>
-</body>
+                            >remove -</button
+                        >
+                    </div> -->

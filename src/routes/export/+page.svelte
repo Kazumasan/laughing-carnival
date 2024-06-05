@@ -32,9 +32,15 @@
     const exportToCSV = async () => {
         console.log(results);
         let reduced: any = [];
-        results.forEach((result) => {
-            reduced.push(result.item);
-        });
+        if (searchText != "") {
+            results.forEach((result) => {
+                reduced.push(result.item);
+            });
+        } else {
+            data.app.animes.forEach((result) => {
+                reduced.push(result);
+            });
+        }
 
         console.log(reduced);
         console.log(
@@ -53,24 +59,34 @@
     };
 </script>
 
-<div>
-    <input
-        type="text"
-        style="border: 1px solid blue;"
-        name="search"
-        bind:value={searchText}
-    />
-    <table>
-        {#if searchText == ""}
-            {#each data.app.animes as animes}
-                <tr>{animes.titel}</tr>
-            {/each}
-        {:else}
-            {#each results as result}
-                <tr>{result.item.titel}</tr>
-            {/each}
-        {/if}
-    </table>
+<body class="bg-gray-900 text-white">
+    <nav class="min-h-screen container mx-auto p-4">
+        <div class="flex items-center mb-4">
+            <input
+                type="text"
+                class="text-2xl w-80 py-1 pl-3 pr-0 bg-gray-700 rounded-lg"
+                placeholder="Search"
+                bind:value={searchText}
+            />
+        </div>
 
-    <input type="button" on:click={exportToCSV} value="Export to CSV" />
-</div>
+        <table class="w-full border-collapse border border-gray-700 mb-4">
+            {#if searchText == ""}
+                {#each data.app.animes as animes}
+                    <tr class="border border-gray-700">{animes.titel}</tr>
+                {/each}
+            {:else}
+                {#each results as result}
+                    <tr class="border border-gray-700">{result.item.titel}</tr>
+                {/each}
+            {/if}
+        </table>
+
+        <input
+            type="button"
+            class="bg-blue-800 text-white py-2 px-4 rounded border border-gray-700"
+            on:click={exportToCSV}
+            value="Export to CSV"
+        />
+    </nav>
+</body>

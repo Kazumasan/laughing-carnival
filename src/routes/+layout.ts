@@ -36,25 +36,10 @@ export const load = async ({ fetch, data, depends }: any) => {
         data: { session } 
     } = await supabase.auth.getSession();
 
-    let returnObject = {
-        userData : {},
-        animes : await getAnimes(supabase)
-    };
 
-    if(session != null){
-        const {watchlist} = await getWatchlist(supabase, session.user.id)
-        returnObject.userData = {
-            watchlist
-        }
+    let animes = await getAnimes(supabase)
 
-        await returnObject.userData.watchlist.forEach(async(anime)=>{
-            let response = await resolveAnimeID(supabase, anime.animeid)
-            anime.anime = response.data[0];   
-            anime.anime.studio = await resolveStudioIDs(supabase, anime.anime.studio);
-            console.log(anime)
-            delete anime.animeid;
-        })
-    }
-    console.log({supabase, session, app: returnObject})
-    return { supabase, session, app: returnObject}
+
+    // console.log({supabase, session, app: returnObject})
+    return { supabase, session, app: { animes }}
 }

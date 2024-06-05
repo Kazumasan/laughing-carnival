@@ -1,6 +1,7 @@
 <script lang="ts">
+    import {addToWatchlist} from "$lib/db_fetch.ts"
     export let data;
-    import { addToWatchlist } from "$lib/db_fetch.ts";
+    // import { addToWatchlist } from "$lib/db_fetch.ts";
     console.log(data);
     $: data;
 
@@ -30,7 +31,8 @@
         </div>
         <div class="space-y-2">
             <!-- Repeat this div for each entry -->
-            
+
+            {#if data.app}
                 {#each data.app.animes as anime}
                     <div class="flex space-x-2 border border-gray-700 p-2">
                         <div
@@ -69,7 +71,9 @@
                         >
                     </div>
                 {/each}
-        
+            {:else}
+                <div>Failed to Fetch</div>
+            {/if}
         </div>
     </div>
 </body>

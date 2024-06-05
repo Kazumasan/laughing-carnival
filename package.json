@@ -29,6 +29,7 @@
     "@supabase/ssr": "^0.3.0",
     "@supabase/supabase-js": "^2.43.4",
     "fuse.js": "^7.0.0",
-    "jsonexport": "^3.2.0"
+    "jsonexport": "^3.2.0",
+    "papaparse": "^5.4.1"
   }
 }
