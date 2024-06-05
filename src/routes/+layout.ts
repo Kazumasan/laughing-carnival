@@ -55,6 +55,6 @@ export const load = async ({ fetch, data, depends }: any) => {
             delete anime.animeid;
         })
     }
-
+    console.log({supabase, session, app: returnObject})
     return { supabase, session, app: returnObject}
 }

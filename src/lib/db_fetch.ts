@@ -1,3 +1,5 @@
+import { invalidate, goto, invalidateAll } from "$app/navigation";
+import { supabase } from "@supabase/auth-ui-shared";
 
 export const getAnimes = async (supabase : any, selector = "*") => {
 
@@ -74,4 +76,19 @@ export const getWatchlist = async (supabase : any, userid : String) => {
 
 export const resolveAnimeID = async (supabase: any, animeid: String) => {
     return await supabase.from("animes").select("*").eq("id", animeid);
+}
+
+
+export const addToWatchlist = async(supabase: any, animeid : String, userid: String) => {
+    console.log(`added: ${animeid}`)
+    const responseData = await supabase.from("watchlist_entries").insert([{animeid, userid, watched: false}]);
+    console.log(responseData)
+    invalidateAll();
+}
+
+export const removeFromWatchlist = async(supabase: any, animeid : String, userid: String) => {
+    console.log(`added: ${animeid}`)
+    const responseData = await supabase.from("watchlist_entries").delete().eq("animeid", animeid).eq("userid", userid);
+    console.log(responseData)
+    // invalidateAll();
 }
